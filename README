@@ -18,7 +18,7 @@ This project is an example of an IoT (Internet of Things) plant monitoring syste
 
 1. Install the Arduino IDE and required libraries.
 2. Connect the hardware components as specified in the code.
-
+Please see the How_to_link_the_board.png to learn how to learn how to connect the hardware components.
 3. Create an `arduino_secrets.h` file with your WiFi credentials and MQTT server information.
 4. Upload the code to your ESP8266 using the Arduino IDE.
 5. Monitor the ESP8266's serial output for debugging information.
