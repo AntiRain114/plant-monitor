@@ -46,10 +46,8 @@ You can access the sensor data through the local web server or subscribe to the 
 
 ## License
 
-This code is open-source and available under the [MIT License](LICENSE).
+This code is open-source.
 
 ## Author
 
 Zekun Wang
-
-Feel free to modify and extend this README to provide more details about your specific project, its purpose, and how to use it.
