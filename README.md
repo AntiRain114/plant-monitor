@@ -19,9 +19,11 @@ This project is an example of an IoT (Internet of Things) plant monitoring syste
 1. Install the Arduino IDE and required libraries.
 2. Connect the hardware components as specified in the code.
 Please see the How_to_link_the_board.png to learn how to learn how to connect the hardware components.
-3. Create an `arduino_secrets.h` file with your WiFi credentials and MQTT server information.
-4. Upload the code to your ESP8266 using the Arduino IDE.
-5. Monitor the ESP8266's serial output for debugging information.
+<img width="1201" alt="How_to_link_the_board" src="https://github.com/AntiRain114/plant-monitor/assets/92373799/c8824f8a-2eb6-4b2c-aae8-d7a0a2f5a896">
+
+4. Create an `arduino_secrets.h` file with your WiFi credentials and MQTT server information.
+5. Upload the code to your ESP8266 using the Arduino IDE.
+6. Monitor the ESP8266's serial output for debugging information.
 
 ## Code Structure
 
