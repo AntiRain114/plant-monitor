@@ -143,17 +143,61 @@ void sendMQTT() {
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/temperature", msg); //data publish path
 
+   // Check if temperature exceeds a predefined threshold
+  float TEMPERATURE_UPPER_THRESHOLD = 30.0;
+  float TEMPERATURE_LOWER_THRESHOLD = 15.0;
+  bool temperatureAboveUpperThreshold = (Temperature > TEMPERATURE_UPPER_THRESHOLD);
+  bool temperatureBelowLowerThreshold = (Temperature < TEMPERATURE_LOWER_THRESHOLD);
+
+  if (temperatureAboveUpperThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature exceeded upper threshold. Take action!");
+  } else if (temperatureBelowLowerThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature below lower threshold. Take action!");
+  } else {
+    client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature within normal range.");
+  }
+
   Humidity = dht.readHumidity(); // Gets the  humidity data
   snprintf (msg, 50, "%.0f", Humidity); //data format
   Serial.print("Publish message for h: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/humidity", msg); //data publish path
 
+  // Check if humidity exceeds a predefined threshold
+  float HUMIDITY_UPPER_THRESHOLD = 60;
+  float HUMIDITY_LOWER_THRESHOLD = 40;
+
+
+  bool humidityAboveUpperThreshold = (Humidity > HUMIDITY_UPPER_THRESHOLD);
+  bool humidityBelowLowerThreshold = (Humidity < HUMIDITY_LOWER_THRESHOLD);
+
+  if (humidityAboveUpperThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity exceeded upper threshold. Take action!");
+  } else if (humidityBelowLowerThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity below lower threshold. Take action!");
+  } else {
+    client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity within normal range.");
+  }
   //Moisture = analogRead(soilPin);   // moisture read by readMoisture function
   snprintf (msg, 50, "%.0i", Moisture); //data format
   Serial.print("Publish message for m: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/moisture", msg); //data publish path
+
+   // Check if soil moisture exceeds a predefined threshold
+  float MOISTURE_UPPER_THRESHOLD = 40;
+  float MOISTURE_LOWER_THRESHOLD = 20;
+
+  bool moistureAboveUpperThreshold = (Moisture > MOISTURE_UPPER_THRESHOLD);
+  bool moistureBelowLowerThreshold = (Moisture < MOISTURE_LOWER_THRESHOLD);
+
+  if (moistureAboveUpperThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture exceeded upper threshold. Take action!");
+  } else if (moistureBelowLowerThreshold) {
+    client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture below lower threshold. Take action!");
+  } else {
+    client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture within normal range.");
+  }
 
 }
 
@@ -250,4 +294,3 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
   ptr += "</html>\n";
   return ptr;
 }
-
