@@ -32,7 +32,7 @@ Please see the How_to_link_the_board.png to learn how to learn how to connect th
 - `readMoisture()`: Reads soil moisture data from the sensor.
 - `startWifi()`: Connects to a WiFi network.
 - `syncDate()`: Synchronizes the device's time with an NTP server.
-- `sendMQTT()`: Publishes temperature, humidity, and moisture data to MQTT.
+- `sendMQTT()`: Publishes temperature, humidity, moisture data, and the situation assessments to MQTT.
 - `callback()`: Handles incoming MQTT messages.
 - `reconnect()`: Reconnects to the MQTT broker if the connection is lost.
 - `startWebserver()`: Sets up an HTTP server for local monitoring.
