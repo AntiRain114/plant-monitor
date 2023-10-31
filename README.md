@@ -7,7 +7,7 @@ This project is an example of an IoT (Internet of Things) plant monitoring syste
 - ESP8266 (e.g., NodeMCU or ESP-01)
 - DHT22 (AM2302) Temperature and Humidity Sensor
 - Soil Moisture Sensor
-- Blue LED for Status Indication
+- Blue LED on board for Status Indication
 
 ## Software Requirements
 
