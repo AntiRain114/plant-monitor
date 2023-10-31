@@ -6,6 +6,8 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
+//#include <ESP8266HTTPClient.h>  developing function
+
 #define DHTTYPE DHT22   // Define the DHT sensor type as DHT22 (AM2302) or AM2321
 
 // Sensors - DHT22 and Nails
@@ -28,7 +30,8 @@ const char* ssid     = SECRET_SSID; // Set the WiFi SSID from the arduino_secret
 const char* password = SECRET_PASS; // Set the WiFi password from the arduino_secrets.h file
 const char* mqttuser = SECRET_MQTTUSER; // Set the MQTT username from the arduino_secrets.h file
 const char* mqttpass = SECRET_MQTTPASS; // Set the MQTT password from the arduino_secrets.h file
-
+//const char* discordWebhookUrl = "https://discord.com/api/webhooks/1169048071548702750/pDUWnAErtUo4E1O-18NsnlrrHvUGMFfTbjV3VCIs01vVf7OmUspYtW-qxR5xg6zPU-IY";
+//developing function this is the webhook that will be used
 
 ESP8266WebServer server(80);
 const char* mqtt_server = "mqtt.cetools.org"; // MQTT server address
@@ -202,10 +205,12 @@ void sendMQTT() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
+  // Display the received message's topic
   // show the message 
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
+  // Iterate through the bytes of the message and print them
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
@@ -258,10 +263,12 @@ void handle_OnConnect() {
 }
 
 void handle_NotFound() {
+   // Send a 404 Not Found response with a plain text message
   server.send(404, "text/plain", "Not found");
 }
 
 String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
+   // Send a 404 Not Found response with a plain text message
   String ptr = "<!DOCTYPE html> <html>\n";
   ptr += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
   ptr += "<title>ESP8266 DHT22 Report</title>\n";
@@ -274,6 +281,7 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
   ptr += "<div id=\"webpage\">\n";
   ptr += "<h1>ESP8266 Huzzah DHT22 Report</h1>\n";
 
+ // Insert temperature, humidity, and moisture data into the HTML
   ptr += "<p>Temperature: ";
   ptr += (int)Temperaturestat;
   ptr += " C</p>";
@@ -292,5 +300,30 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
   ptr += "</div>\n";
   ptr += "</body>\n";
   ptr += "</html>\n";
+   // Return the HTML page as a string
   return ptr;
 }
+/* Developing function
+void sendStatusToDiscordWebhook(String statusMessage) {
+  HTTPClient http;
+
+  // Configure HTTP request
+  http.begin(discordWebhookUrl);
+  http.addHeader("Content-Type", "application/json");
+
+  // Create JSON message
+  String jsonMessage = "{\"content\": \"" + statusMessage + "\"}";
+
+  // Send POST request
+  int httpResponseCode = http.POST(jsonMessage);
+
+  if (httpResponseCode == 204) {
+    Serial.println("Status sent to Discord Webhook successfully.");
+  } else {
+    Serial.print("Error sending status to Discord Webhook. HTTP error code: ");
+    Serial.println(httpResponseCode);
+  }
+
+  http.end();
+}
+*/
