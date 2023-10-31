@@ -14,6 +14,21 @@ This project is an example of an IoT (Internet of Things) plant monitoring syste
 - Arduino IDE
 - Libraries: ESP8266WiFi, ESP8266WebServer, ezTime, PubSubClient, DHT, DHT_U
 
+## Plant Introduction: Rosemary
+
+- Rosemary (scientific name: Rosmarinus officinalis) is a common herb known for its aromatic and culinary uses. It is a versatile plant loved by many chefs and gardening enthusiasts.
+
+- Optimal Temperature:
+
+- Rosemary thrives in warm climates. The optimal temperature range for its growth is typically between 15°C to 30°C (59°F to 86°F). Within this range, it can grow vigorously and remain healthy.
+Optimal Air Humidity:
+
+- Rosemary generally adapts well to low humidity environments. It can thrive in relatively dry air conditions. Typical indoor humidity (relative humidity) ranging from 40% to 60% is usually suitable.
+Optimal Soil Moisture:
+
+- Rosemary requires well-draining soil, which means the soil should be kept moderately moist but not overly saturated. It's recommended to wait for the top layer of the soil to dry out before watering again to ensure the soil doesn't become too wet.
+Rosemary is a relatively easy-to-care-for plant and is usually known to prefer abundant sunlight and well-ventilated growth conditions. This multifunctional herb is not only used for culinary purposes but also finds applications in medicinal and decorative settings. By managing the right temperature, humidity, and soil moisture, you can successfully cultivate rosemary in your home or garden, enjoying its unique aroma and versatility.
+
 ## Installation and Setup
 
 1. Install the Arduino IDE and required libraries.
