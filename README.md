@@ -44,6 +44,11 @@ Please see the How_to_link_the_board.png to learn how to learn how to connect th
 
 You can access the sensor data through the local web server or subscribe to the MQTT topics. Data is published to topics like `student/CASA0014/plant/ucfnzw0/temperature`, `student/CASA0014/plant/ucfnzw0/humidity`, and `student/CASA0014/plant/ucfnzw0/moisture`.
 
+## Future plan
+The ability to forward data and alerts through cloud servers to specific software or similar discord channel bots is under development, and is expected to be developed using Webhooks or specific apis to alert users to the status of plants on mobile as well as desktop.
+
+
+
 ## License
 
 This code is open-source.
