@@ -98,7 +98,9 @@ void readMoisture(){
   digitalWrite(blueLED, LOW);
   delay(100);
   // Read the data from the sensor
-  Moisture = analogRead(soilPin);         
+  
+  Moisture = analogRead(soilPin);   
+  //Moisture = map(analogRead(soilPin), 0,xxx, 0, 100); Haven't get the real maximum value of the sensor, will be changed later.
   digitalWrite(sensorVCC, LOW);  
   digitalWrite(blueLED, HIGH);
   delay(100);
