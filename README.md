@@ -4,15 +4,15 @@ This project is an example of an IoT (Internet of Things) plant monitoring syste
 
 ## Hardware Components
 
-- ESP8266 (e.g., NodeMCU or ESP-01)
+- ESP8266 
 - DHT22 (AM2302) Temperature and Humidity Sensor
-- Soil Moisture Sensor
+- Soil Moisture Sensor(include nails)
 - Blue LED on board for Status Indication
 
 ## Software Requirements
 
 - Arduino IDE
-- Libraries: ESP8266WiFi, ESP8266WebServer, ezTime, PubSubClient, DHT, DHT_U
+- Libraries: ESP8266WiFi, ESP8266WebServer, ezTime, PubSubClient, DHT, DHT_U, ESP8266HTTPClient
 
 ## Plant Introduction: Rosemary
 
