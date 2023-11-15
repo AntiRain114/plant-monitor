@@ -62,9 +62,11 @@ Rosemary is a relatively easy-to-care-for plant and is usually known to prefer a
 Data is accessible via the local web server or by subscribing to MQTT topics like student/CASA0014/plant/ucfnzw0/temperature. Future developments include forwarding data to cloud servers and alerting via Discord bots.
 
 ## Future plan
+Realize remote control watering function.
+Expanded into a plant monitoring and management system that can monitor multiple plants and distribute water to different plants.
 Integration with cloud services for data storage and analysis.
 Development of mobile and desktop notifications through Webhooks or APIs.
-Implementing AI for predictive analysis of plant health.
+
 
 
 
