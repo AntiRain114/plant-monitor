@@ -47,6 +47,7 @@ Rosemary is a relatively easy-to-care-for plant and is usually known to prefer a
 3. Configuration File: Create an arduino_secrets.h file with your WiFi and MQTT broker credentials
 4. Code Upload: Using the Arduino IDE, upload the provided code to the ESP8266.
 5. Debugging: Monitor the serial output of the ESP8266 for debugging information.
+6. When actually running, please use a power supply that can provide 3-6V input to ensure stable power supply. At the same time, ensure that the WiFi environment is warm and can successfully connect to the network.
 
 ## Code Structure
 
