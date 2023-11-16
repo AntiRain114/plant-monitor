@@ -1,4 +1,3 @@
-
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ezTime.h>
@@ -6,7 +5,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-//#include <ESP8266HTTPClient.h>  developing function
+#include <ESP8266HTTPClient.h>
 
 #define DHTTYPE DHT22   // Define the DHT sensor type as DHT22 (AM2302) or AM2321
 
@@ -30,7 +29,7 @@ const char* ssid     = SECRET_SSID; // Set the WiFi SSID from the arduino_secret
 const char* password = SECRET_PASS; // Set the WiFi password from the arduino_secrets.h file
 const char* mqttuser = SECRET_MQTTUSER; // Set the MQTT username from the arduino_secrets.h file
 const char* mqttpass = SECRET_MQTTPASS; // Set the MQTT password from the arduino_secrets.h file
-//const char* discordWebhookUrl = "https://discord.com/api/webhooks/1169048071548702750/pDUWnAErtUo4E1O-18NsnlrrHvUGMFfTbjV3VCIs01vVf7OmUspYtW-qxR5xg6zPU-IY";
+const char* discordWebhookUrl = "https://discord.com/api/webhooks/1173788434058457108/oKR_8f8SSrAFNpN5qiJ_oU521zmGl69dM1cHPsBLw0vh0jskqm9SyiLz-ETn9t9C8fTy";
 //developing function this is the webhook that will be used
 
 ESP8266WebServer server(80);
@@ -98,9 +97,7 @@ void readMoisture(){
   digitalWrite(blueLED, LOW);
   delay(100);
   // Read the data from the sensor
-  
-  Moisture = analogRead(soilPin);   
-  //Moisture = map(analogRead(soilPin), 0,xxx, 0, 100); Haven't get the real maximum value of the sensor, will be changed later.
+  Moisture = analogRead(soilPin);         
   digitalWrite(sensorVCC, LOW);  
   digitalWrite(blueLED, HIGH);
   delay(100);
@@ -147,6 +144,7 @@ void sendMQTT() {
   Serial.print("Publish message for t: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/temperature", msg); //data publish path
+  sendStatusToDiscordWebhook("Temperature: " + String(msg));
 
    // Check if temperature exceeds a predefined threshold
   float TEMPERATURE_UPPER_THRESHOLD = 30.0;
@@ -156,10 +154,13 @@ void sendMQTT() {
 
   if (temperatureAboveUpperThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature exceeded upper threshold. Take action!");
+    sendStatusToDiscordWebhook("Temperature exceeded upper threshold. Take action!");
   } else if (temperatureBelowLowerThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature below lower threshold. Take action!");
+    sendStatusToDiscordWebhook("Temperature below lower threshold. Take action!");
   } else {
     client.publish("student/CASA0014/plant/ucfnzw0/temperature_status", "Temperature within normal range.");
+    sendStatusToDiscordWebhook("Temperature within normal range.");
   }
 
   Humidity = dht.readHumidity(); // Gets the  humidity data
@@ -167,6 +168,7 @@ void sendMQTT() {
   Serial.print("Publish message for h: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/humidity", msg); //data publish path
+  sendStatusToDiscordWebhook("Humidity: " + String(msg));
 
   // Check if humidity exceeds a predefined threshold
   float HUMIDITY_UPPER_THRESHOLD = 60;
@@ -178,16 +180,20 @@ void sendMQTT() {
 
   if (humidityAboveUpperThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity exceeded upper threshold. Take action!");
+    sendStatusToDiscordWebhook("Humidity exceeded upper threshold. Take action!");
   } else if (humidityBelowLowerThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity below lower threshold. Take action!");
+    sendStatusToDiscordWebhook("Humidity below lower threshold. Take action!");
   } else {
     client.publish("student/CASA0014/plant/ucfnzw0/humidity_status", "Humidity within normal range.");
+    sendStatusToDiscordWebhook("Humidity within normal range.");
   }
   //Moisture = analogRead(soilPin);   // moisture read by readMoisture function
   snprintf (msg, 50, "%.0i", Moisture); //data format
   Serial.print("Publish message for m: ");
   Serial.println(msg);
   client.publish("student/CASA0014/plant/ucfnzw0/moisture", msg); //data publish path
+  sendStatusToDiscordWebhook("Moisture: " + String(msg));
 
    // Check if soil moisture exceeds a predefined threshold
   float MOISTURE_UPPER_THRESHOLD = 40;
@@ -198,11 +204,17 @@ void sendMQTT() {
 
   if (moistureAboveUpperThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture exceeded upper threshold. Take action!");
+    sendStatusToDiscordWebhook("Moisture exceeded upper threshold. Take action!");
   } else if (moistureBelowLowerThreshold) {
     client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture below lower threshold. Take action!");
+    sendStatusToDiscordWebhook("Moisture below lower threshold. Take action!");
   } else {
     client.publish("student/CASA0014/plant/ucfnzw0/moisture_status", "Moisture within normal range.");
+    sendStatusToDiscordWebhook("Moisture within normal range.");
   }
+
+  
+  
 
 }
 
@@ -305,7 +317,7 @@ String SendHTML(float Temperaturestat, float Humiditystat, int Moisturestat) {
    // Return the HTML page as a string
   return ptr;
 }
-/* Developing function
+//Developing function
 void sendStatusToDiscordWebhook(String statusMessage) {
   HTTPClient http;
 
@@ -328,4 +340,3 @@ void sendStatusToDiscordWebhook(String statusMessage) {
 
   http.end();
 }
-*/
